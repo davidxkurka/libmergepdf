@@ -27,7 +27,7 @@ final class Merger
      */
     private $driver;
 
-    public function __construct(DriverInterface $driver = null)
+    public function __construct(DriverInterface|null $driver = null)
     {
         $this->driver = $driver ?: new DefaultDriver;
     }
@@ -35,7 +35,7 @@ final class Merger
     /**
      * Add raw PDF from string
      */
-    public function addRaw(string $content, PagesInterface $pages = null): void
+    public function addRaw(string $content, PagesInterface|null $pages = null): void
     {
         $this->sources[] = new RawSource($content, $pages);
     }
@@ -43,7 +43,7 @@ final class Merger
     /**
      * Add PDF from file
      */
-    public function addFile(string $filename, PagesInterface $pages = null): void
+    public function addFile(string $filename, PagesInterface|null $pages = null): void
     {
         $this->sources[] = new FileSource($filename, $pages);
     }
@@ -52,9 +52,9 @@ final class Merger
      * Add files using iterator
      *
      * @param iterable<string> $iterator Set of filenames to add
-     * @param PagesInterface $pages Optional pages constraint used for every added pdf
+     * @param PagesInterface|null $pages Optional pages constraint used for every added pdf
      */
-    public function addIterator(iterable $iterator, PagesInterface $pages = null): void
+    public function addIterator(iterable $iterator, PagesInterface|null $pages = null): void
     {
         foreach ($iterator as $filename) {
             $this->addFile($filename, $pages);
